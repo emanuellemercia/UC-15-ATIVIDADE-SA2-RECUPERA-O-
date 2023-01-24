@@ -1,0 +1,76 @@
+usando  Rec_UC15SA2_TurmaOI . Aulas ;
+
+corda ? opção ;
+
+Faz
+{
+    Consola . Limpar ();
+    Consola . EscrevaLinha ( @"
+        1 - Cadastrar PJ
+        2 - Listar PJ
+        0 - Sair
+    " );
+
+    opcao  =  Console . LeiaLinha ();
+
+    métodos  PessoaJuridicaPj  =  new  PessoaJuridica ();
+
+     switch ( opção )
+     {
+        caso  " 0 " :
+            quebrar ;
+        
+        caso  " 1 " :
+
+            PessoaJuridica  pj  =  new  PessoaJuridica ();
+
+            Consola . WriteLine ( " Digite o nome da PJ: " );
+            pj . Nome  =  Console . LeiaLinha ();
+
+            Consola . WriteLine ( " Informe o rendimento: " );
+            pj . Rendimento  =  float . Analisar ( Console . ReadLine () ! );
+
+            bool  válido ;
+
+            Faz
+            {
+                Consola . WriteLine ( " Informe um CNPJ válido (ex: xx.xxx.xxx/0001-xx): " );
+                pj . CNPJ  =  Consola . LeiaLinha ();
+                válido  =  pj . ValidarCnpj ( pj . CNPJ ! );
+
+            } while ( valido  ==  false );
+
+            métodosPj . Inserir ( pj );
+
+            Consola . WriteLine ( $" Cadastro realizado com Sucesso! " );
+            Consola . WriteLine ( $" Abre ENTER para continuar " );
+            Consola . LeiaLinha ();
+
+            quebrar ;
+        
+        caso  " 2 " :
+
+            Consola . WriteLine ( $" Digite o nome do arquivo que deseja ler: " );
+            string  nomeArquivo  =  Console . LerLinha () ! ;
+
+            PessoaJuridica  pessoaJuridica  =  métodosPj . Ler ( nomeArquivo );
+
+            Consola . WriteLine ( @$"
+                Nome: { pessoa Juridica . Nome }
+                Rendimento: { pessoaJuridica . Rendimento }
+                CNPJ: { pessoa Juridica . CNPJ }
+            " );
+
+            Consola . WriteLine ( " Abre ENTER para continuar " );
+            Consola . LeiaLinha ();
+
+            quebrar ;
+        
+        padrão :
+            Consola . WriteLine ( " Opção Inválida! " );
+            Consola . WriteLine ( " Aperte Enter para continuar " );
+            Consola . LeiaLinha ();
+            quebrar ;
+     }
+
+} while ( opcao  !=  " 0 " );
